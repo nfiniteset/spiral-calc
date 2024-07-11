@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import getSpiralLength from "./util/getSpiralLength";
 import getSpiralPoints from "./util/getSpiralPoints";
+import {mmToFt, mmToIn, mmToM} from './util/convert';
 
 import Canvas from "./components/Canvas";
 import Panel from "./components/Panel";
@@ -37,18 +38,6 @@ export default function Home() {
 
   function handleSpacingChange(event) {
     setDesiredSpacing(event.target.value);
-  }
-
-  function mmToFt(mm) {
-    return (mm / 304.8).toFixed(2);
-  }
-
-  function mmToIn(mm) {
-    return (mm / 25.4).toFixed(2);
-  }
-
-  function mmToM(mm) {
-    return (mm / 1000).toFixed(2);
   }
 
   return (
