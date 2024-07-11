@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex items-start">
-        <Canvas className="h-dvh" points={spiralPoints} />
+        <Canvas className="h-[90vh]" points={spiralPoints} />
 
         <div className="ml-6">
           <h2 className="font-bold">Spiral</h2>
