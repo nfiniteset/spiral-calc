@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 
-import getSpiralLength from "./getSpiralLength";
-import getSpiralPoints from "./getSpiralPoints";
+import getSpiralLength from "./util/getSpiralLength";
+import getSpiralPoints from "./util/getSpiralPoints";
 
-import Canvas from "./Canvas";
+import Canvas from "./components/Canvas";
 
 export default function Home() {
   const [desiredDiameter, setDesiredDiameter] = useState(3048);
@@ -51,25 +51,38 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-6 bg-black">
       <div className="flex items-start">
         <Canvas className="h-[90vh]" points={spiralPoints} />
 
-        <div className="ml-6">
-          <h2 className="font-bold mt-6 block">Parameters in mm</h2>
-          <input className="mt-1 block" type="number" value={desiredDiameter} onChange={handleDiameterChange} />
-          <select className="mt-1 block" value={desiredSpacing} onChange={handleSpacingChange}>
-            <option value={50}>50</option>
-            <option value={100}>100</option>
-            <option value={150}>150</option>
-            <option value={200}>200</option>
-          </select>
+        <div className="ml-6 p-4 bg-gray-200 rounded-lg">
+          <h1 className="font-bold block">LED spiral calc</h1>
+          <h2 className="font-bold mt-6 block">Parameters</h2>
+          <label className="mt-4 block">
+            Desired diameter
+            <div className="flex bg-white rounded-md p-2">
+              <input className="inline appearance-none" type="number" value={desiredDiameter} onChange={handleDiameterChange} />
+              <span className="ml-1"> mm</span>
+            </div>
+            <p className="mt-1">{mmToFt(desiredDiameter)}ft</p>
+          </label>
+          <label className="mt-2 block">
+            Spacing between each LED
+            <select className="mt-1 block w-full rounded-md p-2" value={desiredSpacing} onChange={handleSpacingChange}>
+              <option value={50}>50mm</option>
+              <option value={100}>100mm</option>
+              <option value={150}>150mm</option>
+              <option value={200}>200mm</option>
+            </select>
+            <p className="mt-1">{mmToIn(desiredSpacing)}in</p>
+          </label>
 
-          <h2 className="mt-6 font-bold">Spiral</h2>
-          <p>Diameter: {desiredDiameter}mm / {mmToFt(desiredDiameter)}ft</p>
-          <p>Spacing: {desiredSpacing}mm / {mmToIn(desiredSpacing)}in</p>
-          <p>Length: {spiralLength.toFixed(2)}mm / {mmToM(spiralLength)}m</p>
-          <p>LED count: {spiralLedCount}</p>
+          <h2 className="mt-6 font-bold">Strip length</h2>
+          <p>{spiralLength.toFixed(2)}mm</p>
+          <p>{mmToM(spiralLength)}m</p>
+
+          <h2 className="mt-6 font-bold">LED count</h2>
+          <p>{spiralLedCount}</p>
           
           {/* <h2 className="font-bold mt-6">Pillars</h2>
           <p>Height: {mmToFt(pillarHeight)}ft</p>
@@ -88,7 +101,7 @@ export default function Home() {
           <p>Y min: {spiralYMin.toFixed(3)}</p>
           <p>Y max: {spiralYMax.toFixed(3)}</p> */}
 
-          <textarea className="mt-6 w-full h-24" readonly>
+          <textarea className="mt-1 w-full h-24 p-2 rounded-md" readonly>
             {spiralPoints.reduce((acc, point) => (
               acc += `[${point[0].toFixed(3)}, ${point[1].toFixed(3)}], `
             ), "")}
