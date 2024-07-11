@@ -6,6 +6,7 @@ import getSpiralLength from "./util/getSpiralLength";
 import getSpiralPoints from "./util/getSpiralPoints";
 
 import Canvas from "./components/Canvas";
+import Panel from "./components/Panel";
 
 export default function Home() {
   const [desiredDiameter, setDesiredDiameter] = useState(3048);
@@ -55,7 +56,7 @@ export default function Home() {
       <div className="flex items-start">
         <Canvas className="h-[90vh]" points={spiralPoints} />
 
-        <div className="ml-6 p-4 bg-gray-200 rounded-lg">
+        <Panel className="h-[90vh]">
           <h1 className="font-bold block">LED spiral calc</h1>
           <h2 className="font-bold mt-6 block">Parameters</h2>
           <label className="mt-4 block">
@@ -106,7 +107,7 @@ export default function Home() {
               acc += `[${point[0].toFixed(3)}, ${point[1].toFixed(3)}], `
             ), "")}
           </textarea>
-        </div>
+        </Panel>
       </div>
     </main>
   );
