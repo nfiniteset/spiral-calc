@@ -66,9 +66,12 @@ export default function Home() {
           <p>X max: {spiralXMax.toFixed(3)}</p>
           <p>Y min: {spiralYMin.toFixed(3)}</p>
           <p>Y max: {spiralYMax.toFixed(3)}</p>
-          {spiralPoints.map((point, index) => (
-            <p key={index}>[{point[0].toFixed(3)}, {point[1].toFixed(3)}]</p>
-          ))}
+
+          <textarea className="mt-6 w-full h-24" readonly>
+            {spiralPoints.reduce((acc, point) => (
+              acc += `[${point[0].toFixed(3)}, ${point[1].toFixed(3)}], `
+            ), "")}
+          </textarea>
         </div>
       </div>
     </main>
