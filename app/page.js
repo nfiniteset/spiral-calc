@@ -1,4 +1,6 @@
-import React from "react";
+'use client'
+
+import React, { useState } from "react";
 
 import getSpiralLength from "./getSpiralLength";
 import getSpiralPoints from "./getSpiralPoints";
@@ -6,15 +8,16 @@ import getSpiralPoints from "./getSpiralPoints";
 import Canvas from "./Canvas";
 
 export default function Home() {
-  const spiralDiameter = 3048;
-  const spiralSpacing = 50;
-  const spiralLength = getSpiralLength(spiralDiameter, spiralSpacing)
-  const spiralLedCount = Math.floor(spiralLength / spiralSpacing)
-  const spiralPoints = getSpiralPoints(spiralSpacing, spiralSpacing, spiralLedCount);
-  const spiralXMin = Math.min(...spiralPoints.map(point => point[0]));
-  const spiralXMax = Math.max(...spiralPoints.map(point => point[0]));
-  const spiralYMin = Math.min(...spiralPoints.map(point => point[1]));
-  const spiralYMax = Math.max(...spiralPoints.map(point => point[1]));
+  const [desiredDiameter, setDesiredDiameter] = useState(3048);
+  const [desiredSpacing, setDesiredSpacing] = useState(50);
+
+  const spiralLength = getSpiralLength(desiredDiameter, desiredSpacing)
+  const spiralLedCount = Math.floor(spiralLength / desiredSpacing)
+  const spiralPoints = getSpiralPoints(desiredSpacing, desiredSpacing, spiralLedCount);
+  // const spiralXMin = Math.min(...spiralPoints.map(point => point[0]));
+  // const spiralXMax = Math.max(...spiralPoints.map(point => point[0]));
+  // const spiralYMin = Math.min(...spiralPoints.map(point => point[1]));
+  // const spiralYMax = Math.max(...spiralPoints.map(point => point[1]));
 
   const pillarStripLength = 10000;
   const pillarHeight = 2438.4;
@@ -25,6 +28,15 @@ export default function Home() {
   const totalStripLength = pillarStripLength * pillarCount;
   const totalWireLength = (pillarHeight + pillarSpacing) * (pillarCount - 1);
   const totalLedCount = pillarLedCount * pillarCount;
+
+
+  function handleDiameterChange(event) {
+    setDesiredDiameter(event.target.value);
+  }
+
+  function handleSpacingChange(event) {
+    setDesiredSpacing(event.target.value);
+  }
 
   function mmToFt(mm) {
     return (mm / 304.8).toFixed(2);
@@ -44,9 +56,18 @@ export default function Home() {
         <Canvas className="h-[90vh]" points={spiralPoints} />
 
         <div className="ml-6">
-          <h2 className="font-bold">Spiral</h2>
-          <p>Diameter: {spiralDiameter}mm / {mmToFt(spiralDiameter)}ft</p>
-          <p>Spacing: {spiralSpacing}mm / {mmToIn(spiralSpacing)}in</p>
+          <h2 className="font-bold mt-6 block">Parameters in mm</h2>
+          <input className="mt-1 block" type="number" value={desiredDiameter} onChange={handleDiameterChange} />
+          <select className="mt-1 block" value={desiredSpacing} onChange={handleSpacingChange}>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+            <option value={150}>150</option>
+            <option value={200}>200</option>
+          </select>
+
+          <h2 className="mt-6 font-bold">Spiral</h2>
+          <p>Diameter: {desiredDiameter}mm / {mmToFt(desiredDiameter)}ft</p>
+          <p>Spacing: {desiredSpacing}mm / {mmToIn(desiredSpacing)}in</p>
           <p>Length: {spiralLength.toFixed(2)}mm / {mmToM(spiralLength)}m</p>
           <p>LED count: {spiralLedCount}</p>
           
@@ -62,10 +83,10 @@ export default function Home() {
           <p>Total wire length: {mmToM(totalWireLength)}m</p> */}
 
           <h2 className="font-bold mt-6">Points</h2>
-          <p>X min: {spiralXMin.toFixed(3)}</p>
+          {/* <p>X min: {spiralXMin.toFixed(3)}</p>
           <p>X max: {spiralXMax.toFixed(3)}</p>
           <p>Y min: {spiralYMin.toFixed(3)}</p>
-          <p>Y max: {spiralYMax.toFixed(3)}</p>
+          <p>Y max: {spiralYMax.toFixed(3)}</p> */}
 
           <textarea className="mt-6 w-full h-24" readonly>
             {spiralPoints.reduce((acc, point) => (
