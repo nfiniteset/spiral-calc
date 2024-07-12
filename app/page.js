@@ -4,7 +4,6 @@ import React, { useState } from "react";
 
 import getSpiralLength from "./util/getSpiralLength";
 import getSpiralPoints from "./util/getSpiralPoints";
-import {mmToFt, mmToIn, mmToM} from './util/convert';
 
 import Canvas from "./components/Canvas";
 import Panel from "./components/Panel";
@@ -18,14 +17,6 @@ export default function Home() {
   const spiralLedCount = Math.floor(spiralLength / desiredSpacing)
   const spiralPoints = getSpiralPoints(desiredSpacing, desiredSpacing, spiralLedCount);
 
-  function handleDiameterChange(event) {
-    setDesiredDiameter(event.target.value);
-  }
-
-  function handleSpacingChange(event) {
-    setDesiredSpacing(event.target.value);
-  }
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-6 bg-black">
       <div className="flex items-start">
@@ -33,9 +24,9 @@ export default function Home() {
 
         <Panel className="h-[90vh]">
           <SpiralControls {...{desiredDiameter,
-            handleDiameterChange,
+            setDesiredDiameter,
             desiredSpacing,
-            handleSpacingChange,
+            setDesiredSpacing,
             spiralLength,
             spiralLedCount,
             spiralPoints}}>

@@ -9,13 +9,21 @@ import { mmToFt, mmToM, mmToIn } from '../util/convert';
 
 function SpiralControls({
   desiredDiameter,
-  handleDiameterChange,
+  setDesiredDiameter,
   desiredSpacing,
-  handleSpacingChange,
+  setDesiredSpacing,
   spiralLength,
   spiralLedCount,
   spiralPoints
 }) {
+  function handleDiameterChange(event) {
+    setDesiredDiameter(event.target.value);
+  }
+
+  function handleSpacingChange(event) {
+    setDesiredSpacing(event.target.value);
+  }
+
   return (
     <>
       <h1 className="font-bold block">LED spiral calc</h1>
