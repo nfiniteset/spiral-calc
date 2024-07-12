@@ -1,0 +1,9 @@
+  // const pillarStripLength = 10000;
+  // const pillarHeight = 2438.4;
+  // const pillarSpacing = 2438.4;
+  // const pillarLEDSpacing = 50;
+  // const pillarLedCount = Math.floor(pillarStripLength / pillarLEDSpacing);
+  // const pillarCount = 8;
+  // const totalStripLength = pillarStripLength * pillarCount;
+  // const totalWireLength = (pillarHeight + pillarSpacing) * (pillarCount - 1);
+  // const totalLedCount = pillarLedCount * pillarCount;
