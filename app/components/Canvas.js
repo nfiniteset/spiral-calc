@@ -8,7 +8,7 @@ const centerY = canvasWidth / 2;
 const dotSize = 10;
 
 function angleFromOrigin(x, y) {
-  const radians = Math.atan2(y, x); // Calculate the angle in radians
+  const radians = Math.atan2(centerY - y, centerX - x); // Calculate the angle in radians
   const degrees = radians * (180 / Math.PI); // Convert radians to degrees
   return degrees < 0 ? degrees + 360 : degrees; // Normalize the angle to be within 0-360 degrees
 }
@@ -25,7 +25,7 @@ const Canvas = props => {
                 const point = points[i];
                 const x = centerX + point[0];
                 const y = centerY + point[1];
-                ctx.fillStyle = `hsl(${angleFromOrigin(x, y)*2.5}, 100%, 50%)`;
+                ctx.fillStyle = `hsl(${angleFromOrigin(x, y)}, 100%, 50%)`;
                 ctx.beginPath();
                 ctx.arc(x, y, dotSize, 0, 2 * Math.PI);
                 ctx.fill();
