@@ -24,6 +24,10 @@ function SpiralControls({
     setDesiredSpacing(event.target.value);
   }
 
+  const spiralPointsText = spiralPoints.reduce((acc, point) => (
+  acc += `[${point[0].toFixed(3)}, ${point[1].toFixed(3)}], `
+  ), "")
+
   return (
     <div className="flex flex-col h-full pb-12">
       <h1 className="font-bold block">LED spiral calc</h1>
@@ -39,6 +43,7 @@ function SpiralControls({
       <label className="mt-2 block">
         Spacing between each LED
         <select className="mt-1 block w-full rounded-md p-2" value={desiredSpacing} onChange={handleSpacingChange}>
+          <option value={17}>16mm - 60 per meter</option>
           <option value={50}>50mm</option>
           <option value={100}>100mm</option>
           <option value={150}>150mm</option>
@@ -56,9 +61,7 @@ function SpiralControls({
 
       <h2 className="font-bold mt-6">Points</h2>
       <textarea className="mt-1 w-full h-24 p-2 rounded-md h-full min-h-24" readOnly>
-        {spiralPoints.reduce((acc, point) => (
-        acc += `[${point[0].toFixed(3)}, ${point[1].toFixed(3)}], `
-        ), "")}
+        {spiralPointsText}
       </textarea>
     </div>
   );
