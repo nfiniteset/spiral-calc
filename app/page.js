@@ -11,7 +11,7 @@ import SpiralControls from "./components/SpiralControls";
 
 export default function Home() {
   const [desiredDiameter, setDesiredDiameter] = useState(3048);
-  const [desiredSpacing, setDesiredSpacing] = useState(50);
+  const [desiredSpacing, setDesiredSpacing] = useState(100);
 
   const spiralLength = getSpiralLength(desiredDiameter, desiredSpacing)
   const spiralLedCount = Math.floor(spiralLength / desiredSpacing)
